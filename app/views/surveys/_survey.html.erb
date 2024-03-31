@@ -1,0 +1,5 @@
+<td class="table-info"><%= link_to survey.question, survey_url(survey, :format => "js", remote: true), remote: true %></td>
+<td class="table-info text-nowrap">Created <%= time_ago_in_words survey.created_at %> ago</td>
+<td class="table-info text-nowrap"><%= survey.total_responses %> responses </td>
+<td class="table-success text-nowrap"><%= '%5.2f' % survey.yes_percentage %>% YES</td>
+<td class="table-warning text-nowrap"><%= '%5.2f' % survey.no_percentage %>% NO</td>

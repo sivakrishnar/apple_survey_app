@@ -1,0 +1,34 @@
+<div class="modal fade" id="surveyResultModal" tabindex="-1" aria-labelledby="surveyResultModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Survey</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-8">
+        <% if notice %><%= notice %><% end %>
+         <%= form_with(url: results_path(survey_id: @survey), method: :post) do |form| %>
+           <table class="table">
+             <tr>
+               <td class="table-primary"><p><%= @survey.question %></p></td>
+               <td class="table-success"><%= form.radio_button :answer, true, checked: true %> <%= form.label 'answer_yes', 'Yes' %></td>
+               <td class="table-warning"><%= form.radio_button :answer, false %> <%= form.label 'answer_no', 'No'%></td>
+             </tr>
+           </table> 
+           <button type="submit" class="btn btn-primary mb-3" id="result_submit_btn">Save</button>
+         <% end %>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <table class="table table-striped table-condensed">
+          <% @survey.results.each do |result| %>
+            <tr>
+              <td class="<%= result.answer ? 'table-success' : 'table-warning' %>"><%= result.user.email %> responded <%= result.yes_or_no %> to this survey <%= time_ago_in_words result.created_at %> ago</td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

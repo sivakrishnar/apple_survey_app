@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SurveyDonkey</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-light">
+    <div class="container-flouid">
+      <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+        <div class="container">
+          <a class="navbar-brand" href="<%= root_path %>">
+            <h1>SurveyDonkey</h1>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="<%= root_path %>"></a>
+              </li>
+            </ul>
+            <% if user_signed_in? %> 
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-primary mr-2" %> 
+              <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#createSurveyModal">Create New Survey</button>
+              <%= render "surveys/create_modal" %>
+            <% else %>
+              <%= button_to "Sign in", new_user_session_path, class: "btn btn-outline-primary mr-2" %> 
+            <% end %>  
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <% if notice %>
+      <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+        <%= alert %>
+      </div>
+    <% end %>
+
+    <div class="container">
+      <br />
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<h3>Current Surveys:</h3>
+<div id="surveys">
+  <table class="table table-hover">
+    <tbody>
+    <% @surveys.each do |survey| %>
+      <tr>
+        <%= render survey %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="surveyResult"></div>
